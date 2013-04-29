@@ -3,7 +3,7 @@
 Plugin Name: WordPress Upload Custom Meta Box 
 Plugin URI: http://github.com/tommcfarlin/WordPress-Upload-Custom-Meta-Box/
 Description: An example plugin for how to include a metabox for attaching files to your WordPress posts outside of the media uploader.
-Version: 1.0
+Version: 0.2
 Author: Tom McFarlin
 Author URI: http://tommcfarlin.com
 Author Email: tom@tommcfarlin.com
@@ -27,7 +27,7 @@ License:
 */
 
 if( ! defined( 'UMB_VERSION' ) ) {
-	define( 'UMB_VERSION', 1.0 );
+	define( 'UMB_VERSION', 0.2 );
 } // end if
 
 class Upload_Meta_Box {
@@ -35,6 +35,9 @@ class Upload_Meta_Box {
 	/*--------------------------------------------*
 	 * Attributes
 	 *--------------------------------------------*/
+	 
+	 // A reference to the single instance of this class
+	 private static $instance = null;
 
 	 // Represents the nonce value used to save the post media
 	 private $nonce = 'wp_upm_media_nonce';
@@ -44,10 +47,25 @@ class Upload_Meta_Box {
 	 *--------------------------------------------*/
 
 	 /**
+	  * Provides access to a single instance of this class.
+	  *
+	  * @return	object	A single instance of this class.
+	  */
+	 public static function get_instance() {
+		 
+		 if( null == self::$instance ) {
+			 self::$instance = new self;
+		 } // end if
+		 
+		 return self::$instance;
+		 
+	 } // end get_instance;
+
+	 /**
 	  * Initializes localiztion, sets up JavaScript, and displays the meta box for saving the file
 	  * information.
 	  */
-	 public function __construct() {
+	 private function __construct() {
 	 
 	 	// Localization, Styles, and JavaScript
 	 	add_action( 'init', array( $this, 'plugin_textdomain' ) );
@@ -172,4 +190,6 @@ class Upload_Meta_Box {
 	} // end user_can_save
 
 } // end class
-$GLOBALS['upload-meta-box'] = new Upload_Meta_Box();
+
+// Get an instance of the class
+Upload_Meta_Box::get_instance();

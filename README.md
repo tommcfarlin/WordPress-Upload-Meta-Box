@@ -3,7 +3,7 @@
 * [Tom McFarlin](http://tommcfarlin.com)
 * Requires at least: 3.5
 * Tested up to: 3.5.1
-* Stable tag: 0.1
+* Stable tag: 0.2
 
 WordPress Upload Meta Box is a plugin that demonstrates how to upload files within the context of the post editor.
 
@@ -27,6 +27,10 @@ It introduces a meta box to each post page that allows you to attach a file to t
 3. Activate the plugin on the WordPress Plugins dashboard
 
 ## Changelog
+
+### 0.2 (29 April 2013)
+* Implementing the class as a singleton
+* Updating versioning so it matches GitHub tags
 
 ### 0.1 (22 March 2013)
 * Initial release
